@@ -15,15 +15,58 @@ st.markdown("---")
 # Create two columns
 col1, col2 = st.columns(2)
 
+# ----------- MAPPING DICTIONARIES -----------
+
+condition_dict = {
+    "Poor": 1,
+    "Fair": 2,
+    "Average": 3,
+    "Good": 4,
+    "Very Good": 5
+}
+
+grade_dict = {
+    "Low Quality": 1,
+    "Below Average": 3,
+    "Average": 5,
+    "Above Average": 7,
+    "High Quality": 9,
+    "Luxury": 11,
+    "Ultra Luxury": 13
+}
+
+views_dict = {
+    "No View": 0,
+    "Poor View": 1,
+    "Fair View": 2,
+    "Good View": 3,
+    "Excellent View": 4
+}
+
+waterfront_dict = {
+    "No Waterfront": 0,
+    "Waterfront Present": 1
+}
+
+# ----------- INPUT SECTION -----------
+
 with col1:
     st.subheader("🏡 Basic Information")
     bedrooms = st.number_input("No of bedrooms", min_value=0)
     bathrooms = st.number_input("No of bathrooms", min_value=0)
     floors = st.number_input("No of floors", min_value=0)
-    condition = st.number_input("House condition", min_value=0)
-    grade = st.number_input("House grade", min_value=0)
-    waterfront = st.selectbox("Waterfront present", [0, 1])
-    views = st.number_input("No of views", min_value=0)
+
+    condition_label = st.selectbox("House Condition", list(condition_dict.keys()))
+    condition = condition_dict[condition_label]
+
+    grade_label = st.selectbox("House Grade", list(grade_dict.keys()))
+    grade = grade_dict[grade_label]
+
+    waterfront_label = st.selectbox("Waterfront", list(waterfront_dict.keys()))
+    waterfront = waterfront_dict[waterfront_label]
+
+    views_label = st.selectbox("View Quality", list(views_dict.keys()))
+    views = views_dict[views_label]
 
 with col2:
     st.subheader("📏 Area & Location Details")
@@ -31,14 +74,17 @@ with col2:
     total_floor_area = st.number_input("Total floor area", min_value=0)
     total_lot_area = st.number_input("Total lot area", min_value=0)
     living_area_renov = st.number_input("Living area renovation")
+
     built_year = st.number_input("Built Year", min_value=1900, max_value=2026)
     renov_year = st.number_input("Renovation Year", min_value=0)
-    lat = st.number_input("Lattitude")
+
+    lat = st.number_input("Latitude")
     long = st.number_input("Longitude")
 
 st.markdown("---")
 
-# Prediction Button Centered
+# ----------- PREDICTION -----------
+
 if st.button("💰 Predict House Price"):
 
     input_data = pd.DataFrame({
