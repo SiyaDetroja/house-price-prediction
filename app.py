@@ -72,7 +72,7 @@ with col2:
     st.subheader("📏 Area & Location Details")
     living_area = st.number_input("Living area (sqft)", min_value=0)
     total_floor_area = st.number_input("Total floor area", min_value=0)
-    total_lot_area = st.number_input("Total lot area", min_value=0)
+    total_lot_area = st.number_input("Total plot area(sqft)", min_value=0)
     living_area_renov = st.number_input("Living area renovation")
 
     built_year = st.number_input("Built Year", min_value=1900, max_value=2026)
